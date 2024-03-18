@@ -17,6 +17,7 @@ import ViewProducts from "./components/Admin/ViewProducts"
 import Cart from "./components/Cart"
 import CheckoutDetails from "./components/CheckoutDetails"
 import { Protected } from "./components/HiddenLinks"
+import ProductDetails from './components/ProductDetails'
 function App() {
 
   return (
@@ -28,6 +29,7 @@ function App() {
     <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/products' element={<ProductsList/>}/>
+        <Route path='/product-details/:id' element={<ProductDetails/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/> 
         <Route path='/admin'element={<Dashboard/>}>

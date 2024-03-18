@@ -9,7 +9,9 @@ const ProductData = ({product}) => {
   return (
     <div className='col-3 mb-3'>
         <div className='card'>
+          <Link to={`/product-details/${product.id}`}>
            <img src={product.image[0]}  className='card-img-top' height='200px'/>
+           </Link>
            <div className='card-body'>
                 <p className='card-text'>
                     {product.name} {product.category}<br/>

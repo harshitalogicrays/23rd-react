@@ -11,6 +11,7 @@ const cartSlice=createSlice({
                 //add
                     state.cartItems=[...state.cartItems,{...action.payload,cartQuantity:1}]
                     toast.success(`${action.payload.name} added to cart`)
+                    window.scrollTo(0,0)
             }
             else {
                 //increase 
