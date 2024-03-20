@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import {Container,Nav,NavDropdown,Navbar} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import {Button, Container,Form,InputGroup,Nav,NavDropdown,Navbar} from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import {FaArrowAltCircleLeft, FaHome, FaListAlt, FaLock, FaPenAlt, FaShoppingCart} from 'react-icons/fa'
+import {FaArrowAltCircleLeft, FaHome, FaListAlt, FaLock, FaPenAlt, FaSearch, FaShoppingCart} from 'react-icons/fa'
 import { ShowOnLogin, ShowOnLogout } from './HiddenLinks';
 import { toast } from 'react-toastify';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { doc, getDoc } from 'firebase/firestore';
 import { loginuser, logoutuser, selectUserName, selectUserRole } from '../redux/authSlice';
 import { selectCartItems } from '../redux/cartSlice';
+import useFetchCollection from '../customhooks/useFetchCollection';
+import { FILTER_BY_SEARCH } from '../redux/filterSlice';
 
 const Header = () => {
   const cartItems=useSelector(selectCartItems)
@@ -42,6 +44,17 @@ const Header = () => {
     });
   },[auth])
 
+
+  let [search,setSearch]=useState('')
+  let {data:products}=useFetchCollection("products")
+  // let handleSearch=()=>{
+  //     dispatch(FILTER_BY_SEARCH({products,search}))
+  // }
+  useEffect(()=>{
+    dispatch(FILTER_BY_SEARCH({products,search}))
+  },[search])
+
+
    return (
     <Navbar bg="dark" data-bs-theme="dark" collapseOnSelect  expand="md">
         <Container fluid>
@@ -61,6 +74,14 @@ const Header = () => {
             }
           </Nav>
           <Nav>
+            <Form>
+              <InputGroup>
+                <Form.Control placeholder='search by name or category ' value={search} 
+                onChange={(e)=>setSearch(e.target.value)}/>
+                {/* <Button variant='danger' onClick={handleSearch}><FaSearch/></Button> */}
+              </InputGroup>
+            </Form>
+
             {userrole !='admin' && 
           <Nav.Link as={Link} to='/cart'><FaShoppingCart size={30}/> 
                     <span  class="badge rounded-pill text-bg-danger">

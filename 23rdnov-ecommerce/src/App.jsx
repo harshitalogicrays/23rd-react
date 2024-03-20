@@ -18,6 +18,8 @@ import Cart from "./components/Cart"
 import CheckoutDetails from "./components/CheckoutDetails"
 import { Protected } from "./components/HiddenLinks"
 import ProductDetails from './components/ProductDetails'
+import Checkout from "./components/Checkout"
+import CheckoutSuccess from "./components/CheckoutSuccess"
 function App() {
 
   return (
@@ -46,6 +48,8 @@ function App() {
 
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/checkout-details' element={<Protected><CheckoutDetails/></Protected>}/>
+        <Route path='/checkout' element={<Protected><Checkout/></Protected>}/>
+        <Route path='/checkout-success' element={<Protected><CheckoutSuccess/></Protected>}/>
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>
    </>

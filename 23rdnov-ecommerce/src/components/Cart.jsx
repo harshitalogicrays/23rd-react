@@ -81,6 +81,7 @@ const Cart = () => {
                             name=""
                             id=""
                             class="btn btn-warning"
+                            disabled={cartItems.length==0 && "disabled"} 
                         >
                             Checkout
                         </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CheckoutSummary from './CheckoutSummary'
 import {
     CitySelect,
@@ -6,16 +6,28 @@ import {
     StateSelect,
   } from "@davzon/react-country-state-city";
   import "@davzon/react-country-state-city/dist/react-country-state-city.css";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectShippingAddress, store_shippingaddress } from '../redux/checkoutSlice';
 const CheckoutDetails = () => {
     let [shippingAddress,setShippingAddress]=useState({name:'',phone:'',pincode:'',address:'',country:'',state:'',city:''})
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
-
+    const navigate=useNavigate()
+    const dispatch=useDispatch() 
 
     let handleSubmit=(e)=>{
         e.preventDefault()
-        alert(JSON.stringify(shippingAddress))
+        // alert(JSON.stringify(shippingAddress))
+        dispatch(store_shippingaddress(shippingAddress))
+        navigate('/checkout')
     }
+
+    const shipping=useSelector(selectShippingAddress)
+    useEffect(()=>{
+      setShippingAddress(shipping)
+    },[])
+
   return (
     <div className='container mt-5'>
         <div className="row shadow">
@@ -45,17 +57,17 @@ const CheckoutDetails = () => {
             </div>
             <div class="mb-3">
                         <label for="" class="form-label">Country</label>
-                        <CountrySelect onChange={(e) => {setCountryid(e.id); setShippingAddress({...shippingAddress,country:e.name}) }} placeHolder="Select Country" />
+                        <CountrySelect onChange={(e) => {setCountryid(e.id); setShippingAddress({...shippingAddress,country:e.name}) }} placeHolder="Select Country"  />
                      </div>
             <div className="row">
                     <div class="mb-3 col-6">
                         <label for="" class="form-label">state</label>
                         <StateSelect countryid={countryid} onChange={(e) => {setstateid(e.id);setShippingAddress({...shippingAddress,state:e.name}) }}   
-                        placeHolder="Select State"  />
+                        placeHolder="Select State" />
                      </div>                   
                      <div class="mb-3 col-6">
                         <label for="" class="form-label">city</label>
-                        <CitySelect countryid={countryid} stateid={stateid}  onChange={(e) => {setShippingAddress({...shippingAddress,city:e.name}) }} placeHolder="Select City"/>
+                        <CitySelect countryid={countryid} stateid={stateid}  onChange={(e) => {setShippingAddress({...shippingAddress,city:e.name}) }}  placeHolder="Select City"/>
                      </div>   
             </div>
             <button type="submit" class="btn btn-primary"> Proceed to Checkout </button>
