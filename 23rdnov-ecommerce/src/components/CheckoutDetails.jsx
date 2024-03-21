@@ -57,7 +57,7 @@ const CheckoutDetails = () => {
             </div>
             <div class="mb-3">
                         <label for="" class="form-label">Country</label>
-                        <CountrySelect onChange={(e) => {setCountryid(e.id); setShippingAddress({...shippingAddress,country:e.name}) }} placeHolder="Select Country"  />
+                        <CountrySelect onChange={(e) => {setCountryid(e.id); setShippingAddress({...shippingAddress,country:e.name}) }} placeHolder="Select Country"/>
                      </div>
             <div className="row">
                     <div class="mb-3 col-6">

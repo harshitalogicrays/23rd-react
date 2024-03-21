@@ -96,7 +96,7 @@ const Header = () => {
              
               <ShowOnLogin>
                 <Nav.Link>Welcome {username}</Nav.Link>
-                {userrole =='user' &&  <Nav.Link>My Orders</Nav.Link> }
+                {userrole =='user' &&  <Nav.Link  as={Link} to='/myorders'>My Orders</Nav.Link> }
                 <Nav.Link onClick={handleLogout}><FaArrowAltCircleLeft/>Logout</Nav.Link>
               </ShowOnLogin>
           </Nav>

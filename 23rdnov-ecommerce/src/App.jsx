@@ -20,6 +20,10 @@ import { Protected } from "./components/HiddenLinks"
 import ProductDetails from './components/ProductDetails'
 import Checkout from "./components/Checkout"
 import CheckoutSuccess from "./components/CheckoutSuccess"
+import MyOrders from "./components/MyOrders"
+import MyOrderDetails from "./components/MyOrderDetails"
+import Orders from "./components/Admin/Orders"
+import OrderDetails from "./components/Admin/OrderDetails"
 function App() {
 
   return (
@@ -44,12 +48,16 @@ function App() {
             <Route path='viewsliders'  element={<ViewSlider/>} />
             <Route path='editslider/:id'  element={<AddSlider/>} />
             <Route path='viewproducts'  element={<ViewProducts/>} />
+            <Route path='orders'  element={<Orders/>} />
+            <Route path='orders/details/:id'  element={<OrderDetails/>} />
         </Route>
 
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/checkout-details' element={<Protected><CheckoutDetails/></Protected>}/>
         <Route path='/checkout' element={<Protected><Checkout/></Protected>}/>
         <Route path='/checkout-success' element={<Protected><CheckoutSuccess/></Protected>}/>
+        <Route path='/myorders' element={<Protected><MyOrders/></Protected>}/>
+        <Route path='/myorders/details/:id' element={<Protected><MyOrderDetails/></Protected>}/>
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>
    </>

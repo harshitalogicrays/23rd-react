@@ -36,9 +36,9 @@ const Dashboard = () => {
         </Link>
       </li>  <hr/>
       <li>
-        <a href="#" class="nav-link text-white text-center">
-           Order
-        </a>
+        <Link to='orders' class="nav-link text-white text-center">
+           Orders
+        </Link>
       </li>
     </ul>
     </Col>
